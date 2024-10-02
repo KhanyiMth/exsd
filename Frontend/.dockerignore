@@ -1,29 +1,37 @@
-# flyctl launch added from .gitignore
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Ignore node_modules and other files for Backend
+Backend/node_modules
+Backend/.pnp
+Backend/**/*.pnp.js
+Backend/coverage
+Backend/build
+Backend/**/*.DS_Store
+Backend/**/*.env.local
+Backend/**/*.env.development.local
+Backend/**/*.env.test.local
+Backend/**/*.env.production.local
+Backend/**/*.npm-debug.log*
+Backend/**/*.yarn-debug.log*
+Backend/**/*.yarn-error.log*
+Backend/**/*.env
+Backend/**/*.vscode
 
-# dependencies
-node_modules
-.pnp
-**\.pnp.js
+# Ignore node_modules and other files for Frontend
+Frontend/node_modules
+Frontend/.pnp
+Frontend/**/*.pnp.js
+Frontend/coverage
+Frontend/build
+Frontend/**/*.DS_Store
+Frontend/**/*.env.local
+Frontend/**/*.env.development.local
+Frontend/**/*.env.test.local
+Frontend/**/*.env.production.local
+Frontend/**/*.npm-debug.log*
+Frontend/**/*.yarn-debug.log*
+Frontend/**/*.yarn-error.log*
+Frontend/**/*.env
+Frontend/**/*.vscode
+Frontend/dist
 
-# testing
-coverage
-
-# production
-build
-
-# misc
-**\.DS_Store
-**\.env.local
-**\.env.development.local
-**\.env.test.local
-**\.env.production.local
-
-**\npm-debug.log*
-**\yarn-debug.log*
-**\yarn-error.log*
-
-**\.env
-**\.vscode
-**\dist
+# Fly configuration
 fly.toml
