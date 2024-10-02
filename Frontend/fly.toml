@@ -1,0 +1,46 @@
+app = "project-master"
+
+[build]
+  dockerfile = "path/to/your/Dockerfile"  # You might have to set this for both frontend and backend
+
+[[services]]
+  http_checks = []
+  internal_port = 5000  # Change this to your backend's port
+  script = "npm start"   # Adjust based on your start command
+
+  [services.concurrency]
+    soft_limit = 20
+    hard_limit = 25
+
+  [services.http_service]
+    auto_tls = true
+
+  [[services.ports]]
+    port = 80  # Public port
+    handlers = ["http"]
+
+
+fly.toml
+===============================================
+# fly.toml app configuration file generated for backend-patient-river-1684 on 2024-10-01T15:17:51+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'backend-patient-river-1684'
+primary_region = 'jnb'
+
+[build]
+
+[http_service]
+  internal_port = 5000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
