@@ -1,20 +1,17 @@
-# Use node image
+# Use a Node.js image
 FROM node:14
 
-# Set working directory
+# Set the working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --production  # Use --production to skip dev dependencies in production
 
 # Copy the rest of the backend code
 COPY . .
-
-# Copy .env file
-COPY .env ./
 
 # Expose the port the app listens on
 EXPOSE 5000
