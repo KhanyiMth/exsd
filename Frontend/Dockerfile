@@ -1,5 +1,5 @@
-# Use an official Node.js runtime as a parent image
-FROM node:20.13.1
+# Stage 1: Build
+FROM node:20.13.1 AS build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -7,17 +7,23 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install only production packages for smaller image size
-RUN npm install --production
+# Install any needed packages
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
-# Set environment variable for the port
-ENV PORT=3000
+# Build the application (add this line for frontend frameworks)
+RUN npm run build  # Change this command if your build command is different
+
+# Stage 2: Serve
+FROM nginx:alpine
+
+# Copy the build output to Nginx's html directory
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 80
 
-# Define the command to run the app
-CMD ["npm", "start"]
+# Define the command to run Nginx
+CMD ["nginx", "-g", "daemon off;"]
